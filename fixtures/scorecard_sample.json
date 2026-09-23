@@ -1,0 +1,176 @@
+{
+  "date": "2026-08-01T09:14:22Z",
+  "repo": {
+    "name": "github.com/acme-corp/payment-gateway",
+    "commit": "a3f9c21e8b4d7f60c2a15e93b8ff412d9e7a0c38"
+  },
+  "scorecard": {
+    "version": "v4.13.1",
+    "commit": "7cba9b1c0a1b3f5e2d8c4a6b9e0f1d3c5a7b9e2f"
+  },
+  "score": 3.4,
+  "checks": [
+    {
+      "name": "Branch-Protection",
+      "score": 0,
+      "reason": "branch protection not enabled on development/release branches",
+      "details": [
+        "Warn: branch protection not enabled for branch 'main'",
+        "Warn: branch protection not enabled for branch 'release/v3'",
+        "Info: 4 direct pushes to 'main' observed in the last 30 days"
+      ],
+      "documentation": {
+        "short": "Determines if the default and release branches are protected with GitHub's branch protection settings.",
+        "url": "https://github.com/ossf/scorecard/blob/main/docs/checks.md#branch-protection"
+      }
+    },
+    {
+      "name": "Token-Permissions",
+      "score": 0,
+      "reason": "detected GitHub workflow tokens with excessive permissions",
+      "details": [
+        "Warn: no topLevel permission defined: .github/workflows/release.yml:1",
+        "Warn: no topLevel permission defined: .github/workflows/publish-artifact.yml:1",
+        "Warn: jobLevel 'contents' permission set to 'write': .github/workflows/release.yml:22"
+      ],
+      "documentation": {
+        "short": "Determines if the project's workflows follow the principle of least privilege.",
+        "url": "https://github.com/ossf/scorecard/blob/main/docs/checks.md#token-permissions"
+      }
+    },
+    {
+      "name": "Code-Review",
+      "score": 3,
+      "reason": "found 8 unreviewed changesets out of 30 -- score normalized to 3",
+      "details": [
+        "Warn: merged PR #412 without approval",
+        "Warn: merged PR #418 without approval",
+        "Warn: 6 additional changesets merged by the sole maintainer without second review"
+      ],
+      "documentation": {
+        "short": "Determines if the project requires human code review before pull requests are merged.",
+        "url": "https://github.com/ossf/scorecard/blob/main/docs/checks.md#code-review"
+      }
+    },
+    {
+      "name": "Pinned-Dependencies",
+      "score": 2,
+      "reason": "dependency not pinned by hash detected -- score normalized to 2",
+      "details": [
+        "Warn: third-party GitHubAction not pinned by hash: .github/workflows/ci.yml:14",
+        "Warn: third-party GitHubAction not pinned by hash: .github/workflows/release.yml:31",
+        "Warn: containerImage not pinned by hash: Dockerfile:1",
+        "Info: 12 of 19 pipeline dependencies use mutable tags"
+      ],
+      "documentation": {
+        "short": "Determines if the project has declared and pinned the dependencies of its build process.",
+        "url": "https://github.com/ossf/scorecard/blob/main/docs/checks.md#pinned-dependencies"
+      }
+    },
+    {
+      "name": "Dangerous-Workflow",
+      "score": 0,
+      "reason": "dangerous workflow patterns detected",
+      "details": [
+        "Warn: untrusted code checkout in 'pull_request_target' workflow: .github/workflows/pr-preview.yml:18",
+        "Warn: script injection with untrusted input 'github.event.pull_request.title': .github/workflows/pr-preview.yml:26"
+      ],
+      "documentation": {
+        "short": "Determines if the project's GitHub Action workflows avoid dangerous patterns such as script injection and untrusted code checkouts.",
+        "url": "https://github.com/ossf/scorecard/blob/main/docs/checks.md#dangerous-workflow"
+      }
+    },
+    {
+      "name": "Signed-Releases",
+      "score": 0,
+      "reason": "0 out of the last 5 releases have signed artifacts",
+      "details": [
+        "Warn: release artifact v3.2.1 does not have provenance",
+        "Warn: release artifact v3.2.0 does not have provenance",
+        "Warn: release artifact v3.1.4 does not have provenance"
+      ],
+      "documentation": {
+        "short": "Determines if the project cryptographically signs its release artifacts.",
+        "url": "https://github.com/ossf/scorecard/blob/main/docs/checks.md#signed-releases"
+      }
+    },
+    {
+      "name": "Vulnerabilities",
+      "score": 4,
+      "reason": "6 existing vulnerabilities detected",
+      "details": [
+        "Warn: Project is vulnerable to: GHSA-4w2j-2rg4-5mjw / CVE-2025-31402 (severity: HIGH)",
+        "Warn: Project is vulnerable to: GHSA-9c8x-vp7q-2m3h / CVE-2025-28844 (severity: MEDIUM)",
+        "Info: 4 additional advisories affect transitive dependencies"
+      ],
+      "documentation": {
+        "short": "Determines if the project has open, known, unfixed vulnerabilities.",
+        "url": "https://github.com/ossf/scorecard/blob/main/docs/checks.md#vulnerabilities"
+      }
+    },
+    {
+      "name": "Maintained",
+      "score": 5,
+      "reason": "3 commit(s) and 1 issue activity found in the last 90 days -- score normalized to 5",
+      "details": [
+        "Info: sole active committer accounts for 96% of commits in the last 12 months",
+        "Info: 14 open issues with no maintainer response in over 60 days"
+      ],
+      "documentation": {
+        "short": "Determines if the project is actively maintained.",
+        "url": "https://github.com/ossf/scorecard/blob/main/docs/checks.md#maintained"
+      }
+    },
+    {
+      "name": "SAST",
+      "score": 3,
+      "reason": "SAST tool detected but not run on all commits",
+      "details": [
+        "Warn: CodeQL configured but only triggered on schedule, not on pull_request",
+        "Info: 0 of last 30 merged pull requests were scanned before merge"
+      ],
+      "documentation": {
+        "short": "Determines if the project uses static code analysis.",
+        "url": "https://github.com/ossf/scorecard/blob/main/docs/checks.md#sast"
+      }
+    },
+    {
+      "name": "Fuzzing",
+      "score": 0,
+      "reason": "project is not fuzzed",
+      "details": [
+        "Warn: no fuzzing integration detected (OSS-Fuzz, ClusterFuzzLite, or native harness)"
+      ],
+      "documentation": {
+        "short": "Determines if the project uses fuzzing.",
+        "url": "https://github.com/ossf/scorecard/blob/main/docs/checks.md#fuzzing"
+      }
+    },
+    {
+      "name": "Security-Policy",
+      "score": 8,
+      "reason": "security policy file detected",
+      "details": [
+        "Info: security policy file detected: SECURITY.md:1",
+        "Warn: security policy contains no disclosure timeline commitment"
+      ],
+      "documentation": {
+        "short": "Determines if the project has published a security policy.",
+        "url": "https://github.com/ossf/scorecard/blob/main/docs/checks.md#security-policy"
+      }
+    },
+    {
+      "name": "License",
+      "score": 10,
+      "reason": "license file detected",
+      "details": [
+        "Info: project has a license file: LICENSE:1",
+        "Info: FSF or OSI recognized license: Apache License 2.0"
+      ],
+      "documentation": {
+        "short": "Determines if the project has defined a license.",
+        "url": "https://github.com/ossf/scorecard/blob/main/docs/checks.md#license"
+      }
+    }
+  ]
+}
